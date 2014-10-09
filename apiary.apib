@@ -65,7 +65,7 @@ Using patch, therefore would update only passed fields
 
     [User][]
 
-## Company [/company/{id}{?expandBasic, expandOwners, expandOwnerBasic}]
+## Company [/company/{id}{?expandBasic,expandOwners,expandOwnerBasic}]
 
 This is User resource that contains methods related to the companies that logged in user owns
 
@@ -74,7 +74,53 @@ This is User resource that contains methods related to the companies that logged
     + id (optional, bool)
     + expandBasic = `false` (optional, bool, `true`) ... expand field "name" and "active" of the company
     + expandOwners = `false` (optional, bool, `true`) ... expand owners of the company
-    + expandOwnerBasic = `false` (optional, bool, `true`) ... expand owners name", "email", "username"
+    + expandOwnerBasic = `false` (optional, bool, `true`) ... expand owners basic info
+
++ Model (application/json)
+
+    + Body
+    
+            {
+                collection: [{
+                    "id": 1,
+                    "active": true,
+                    "name": "Teamo",
+                    "owners" : [{"id": 1, "name": "Adam", "email": "adam@teamo.com", "username": "adam"},
+                        {"id": 5, "name": "Neo", "email": "nick@teamo.com", "username": "nick@teamo.com"}]
+                }]
+            }
+
+### Read [GET]
+
+Get companiy info that current user owns with specified company id
+
++ Response 200
+
+    [Company][]
+
+### Update [PATCH]
+
+Update specified company that logged in user owns
+
++ Request (application/json)
+
+        {
+            "name": "NewAwesomeFlashyName"
+        }
+
++ Response 200
+
+    [Company][]
+
+## Company Collection [/company{?expandBasic,expandOwners,expandOwnerBasic}]
+
+This is Company Collection resource that contains methods that works on intire collection of the companies that logged in user owns
+
++ Parameters
+
+    + expandBasic = `false` (optional, bool, `true`) ... expand field "name" and "active" of the company
+    + expandOwners = `false` (optional, bool, `true`) ... expand owners of the company
+    + expandOwnerBasic = `false` (optional, bool, `true`) ... expand owners basic info
 
 + Model (application/json)
 
@@ -85,45 +131,11 @@ This is User resource that contains methods related to the companies that logged
                 "name": "Teamo",
                 "owners" : [{"id": 1, "name": "Adam", "email": "adam@teamo.com", "username": "adam"},
                     {"id": 5, "name": "Neo", "email": "nick@teamo.com", "username": "nick@teamo.com"}]
-            }]
-        }
-
-### Update [PATCH]
-
-Update "name" and "active"
-
-+ Request (application/x-www-form-urlencoded)
-
-        name=NewAwesomeFlashyName
-
-+ Response 200 (application/json)
-
-        {
-            collection: [{
-                "id": 1,
-                "owners" : [{"id": 1}, {"id": 5}]
-            }]
-        }
-
-## Company Collection [/companies{?expandBasic}]
-
-This is Company Collection resource that contains methods that works on intire collection of the companies that logged in user owns
-
-+ Parameters
-
-    + expandBasic = `false` (optional, bool, `true`) ... expand field "name" and "active" of the company
-
-+ Model (application/json)
-
-        {
-            collection: [{
-                "id": 1,
-                "active": true,
-                "name": "Teamo"
             },{
                 "id": 21,
                 "active": false,
-                "name": "MarketVision"
+                "name": "MarketVision",
+                "owners" : [{"id": 5, "name": "Neo", "email": "nick@teamo.com", "username": "nick@teamo.com"}]
             }]
         }
 
@@ -131,19 +143,116 @@ This is Company Collection resource that contains methods that works on intire c
 
 Create company for the logged in user and assign the user as an owner of the company
 
-+ Request (application/x-www-form-urlencoded)
++ Request (application/json)
 
-        name=Teamo
+        {
+            "name": "Teamo"
+        }
 
 + Response 200
 
-    [Company] []
+    [Company][]
 
-
-### Read [GET]
+### Read all [GET]
 
 Get *all* companies that current user owns
 
-+ Response 200 (application/json)
++ Response 200
 
     [Company Collection][]
+
+## Team [/team/{id}{?expandBasic,expandLeaders,expandLeaderBasic}]
+
++ Parameters
+
+    + id (required, number, `1`) ... unique identity of the team which the teams belong to
+    + expandBasic = `false` (optional, bool, `true`) ... expand field "name" of the team
+    + expandLeaders = `false` (optional, bool, `true`) ... expand leaders of the team
+    + expandLeaderBasic = `false` (optional, bool, `true`) ... expand leader basic info
+
++ Model (application/json)
+
+        {
+            collection: [{
+                "id": 1,
+                "name": "Product",
+                "leaders" : [
+                    {"id": 1, "name": "Adam", "email": "adam@teamo.com", "username": "adam"},
+                    {"id": 2, "name": "John", "email": "john@teamo.com", "username": "john@teamo.com"}]
+            }]
+        }
+
+### Read [GET]
+
+Get team info that current user owns or leads with specified company id
+
++ Response 200
+
+    [Team][]
+
+### Update [PATCH]
+
+Update specified team that logged in user owns or leads
+
++ Request (application/json)
+
+        {
+            name: "Sales"
+        }
+
++ Response 200
+
+    [Team][]
+
+## Team Collection [/company/{id}/team{?expandBasic,expandLeaders,expandLeaderBasic}]
+
+This is Team Collection resource that operates of all teams that belong to the company that is owned by the logged in user
+
++ Parameters
+
+    + id (required, number, `1`) ... unique identity of the company which the teams belong to
+    + expandBasic = `false` (optional, bool, `true`) ... expand field "name" of the team
+    + expandLeaders = `false` (optional, bool, `true`) ... expand leaders of the team
+    + expandLeaderBasic = `false` (optional, bool, `true`) ... expand leader basic info
+
++ Model (application/json)
+
+        {
+            collection: [{
+                "id": 1,
+                "name": "Product",
+                "leaders" : [{"id": 1, "name": "Adam", "email": "adam@teamo.com", "username": "adam"},
+                    {"id": 2, "name": "John", "email": "john@teamo.com", "username": "john@teamo.com"}]
+            },{
+                "id": 21,
+                "active": false,
+                "name": "Dev",
+                "owners" : [
+                    {"id": 3, "name": "N8", "email": "n8@teamo.com", "username": "n8"},
+                    {"id": 4, "name": "Ryan", "email": "ryan@teamo.com", "username": "ryan"},
+                    {"id": 5, "name": "Nick", "email": "nick@teamo.com", "username": "nick@teamo.com"},]
+            }]
+        }
+
+### Create [POST]
+
+Create team and assign leaders 
+
++ Request (application/json)
+
+        {
+            "name": "Marketing",
+            "leaders": [2, 3] // Would assign John and Nate as leaders for the marketing team
+        }
+
++ Response 200
+
+    [Team][]
+
+### Read all [GET]
+
+Get *all* teams for the selected company
+
++ Response 200
+
+    [Team Collection][]
