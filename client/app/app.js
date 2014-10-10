@@ -22,6 +22,11 @@ angular.module('teamoApp', [
         if ($cookieStore.get('token')) {
           config.headers.Authorization = 'Bearer ' + $cookieStore.get('token');
         }
+
+        // Include apiary support
+        if(config.url.substr(0, 4) === '/api')
+          config.url =  'http://private-b9a0-teamo.apiary-mock.com' + config.url.substr(4);
+
         return config;
       },
 
