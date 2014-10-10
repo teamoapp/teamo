@@ -15,7 +15,7 @@ This is User resource that contains methods related to currently logged in user 
 + Model (application/json)
 
         {
-            collection: [{
+            "collection": [{
                 "id": 5,
                 "username": "nick@teamo.com",
                 "name": "Nick",
@@ -81,7 +81,7 @@ This is User resource that contains methods related to the companies that logged
     + Body
     
             {
-                collection: [{
+                "collection": [{
                     "id": 1,
                     "active": true,
                     "name": "Teamo",
@@ -125,7 +125,7 @@ This is Company Collection resource that contains methods that works on intire c
 + Model (application/json)
 
         {
-            collection: [{
+            "collection": [{
                 "id": 1,
                 "active": true,
                 "name": "Teamo",
@@ -173,7 +173,7 @@ Get *all* companies that current user owns
 + Model (application/json)
 
         {
-            collection: [{
+            "collection": [{
                 "id": 1,
                 "name": "Product",
                 "leaders" : [
@@ -218,7 +218,7 @@ This is Team Collection resource that operates of all teams that belong to the c
 + Model (application/json)
 
         {
-            collection: [{
+            "collection": [{
                 "id": 1,
                 "name": "Product",
                 "leaders" : [{"id": 1, "name": "Adam", "email": "adam@teamo.com", "username": "adam"},
