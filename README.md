@@ -9,6 +9,13 @@ Branching and work flow via git-flow
 Kickstart via yeoman angular-fullstack
 	http://yeoman.io/
 	https://github.com/DaftMonk/generator-angular-fullstack#heroku
+	
+	Install
+		git clone git@github.com:teamoapp/teamo.git
+		cd teamo
+		npm install
+		bower install
+		grunt server
 
 Deployment via grunt buildcontro:heroku
 	http://gruntjs.com/
