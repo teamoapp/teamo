@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('teamoApp')
-  .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
+  .factory('Auth', function Auth($location, $rootScope, $http, userRepo, $cookieStore, $q) {
     var currentUser = {};
     if($cookieStore.get('token')) {
-      currentUser = User.get();
+      currentUser = userRepo.get();
     }
 
     return {
@@ -26,7 +26,7 @@ angular.module('teamoApp')
         }).
         success(function(data) {
           $cookieStore.put('token', data.token);
-          currentUser = User.get();
+          currentUser = userRepo.get();
           deferred.resolve(data);
           return cb();
         }).
@@ -59,10 +59,10 @@ angular.module('teamoApp')
       createUser: function(user, callback) {
         var cb = callback || angular.noop;
 
-        return User.save(user,
+        return userRepo.save(user,
           function(data) {
             $cookieStore.put('token', data.token);
-            currentUser = User.get();
+            currentUser = userRepo.get();
             return cb(user);
           },
           function(err) {
@@ -82,7 +82,7 @@ angular.module('teamoApp')
       changePassword: function(oldPassword, newPassword, callback) {
         var cb = callback || angular.noop;
 
-        return User.changePassword({ id: currentUser._id }, {
+        return userRepo.changePassword({ id: currentUser._id }, {
           oldPassword: oldPassword,
           newPassword: newPassword
         }, function(user) {
@@ -107,7 +107,7 @@ angular.module('teamoApp')
        * @return {Boolean}
        */
       isLoggedIn: function() {
-        return currentUser.hasOwnProperty('role');
+        return true;//currentUser.hasOwnProperty('role');
       },
 
       /**
