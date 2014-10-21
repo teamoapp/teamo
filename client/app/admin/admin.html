@@ -1,6 +1,6 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<div class="container">
+<div class="container content-margin">
   <p>The delete user and user index api routes are restricted to users with the 'admin' role.</p>
   <ul class="list-group">
     <li class="list-group-item" ng-repeat="user in users">
@@ -9,4 +9,97 @@
         <a ng-click="delete(user)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
     </li>
   </ul>
+
+
+    <h5>Users (apiary)</h5>
+
+    <ul class="list-group">
+        <li class="list-group-item">
+            <strong>Create</strong>
+            <a href="javascript:void(0)" ng-click="userCreate()" class="pull-right">run</a>
+            <code ng-show="userCreateResult">{{userCreateResult}}</code>
+        </li>
+        <li class="list-group-item">
+            <strong>Read</strong>
+            <a href="javascript:void(0)" ng-click="userRead()" class="pull-right">run</a>
+            <code ng-show="userReadResult">{{userReadResult}}</code>
+        </li>
+        <li class="list-group-item">
+            <strong>Update</strong>
+            <a href="javascript:void(0)" ng-click="userUpdate()" class="pull-right">run</a>
+            <code ng-show="userUpdateResult">{{userUpdateResult}}</code>
+        </li>
+        <li class="list-group-item">
+            <strong>Delete</strong>
+            <a href="javascript:void(0)" ng-click="userDelete()" class="pull-right">run</a>
+            <code ng-show="userDeleteResult">{{userDeleteResult}}</code>
+        </li>
+    </ul>
+
+
+    <h5>Company (apiary)</h5>
+
+    <ul class="list-group">
+        <li class="list-group-item">
+            <strong>Create</strong>
+            <a href="javascript:void(0)" ng-click="companyCreate()" class="pull-right">run</a>
+            <code ng-show="companyCreateResult">{{companyCreateResult}}</code>
+        </li>
+        <li class="list-group-item">
+            <strong>Get (List)</strong>
+            <a href="javascript:void(0)" ng-click="companyGet()" class="pull-right">run</a>
+            <code ng-show="companyGetResult">{{companyGetResult}}</code>
+        </li>
+        <li class="list-group-item">
+            <strong>Read</strong>
+            <a href="javascript:void(0)" ng-click="companyRead()" class="pull-right">run</a>
+            <code ng-show="companyReadResult">{{companyReadResult}}</code>
+        </li>
+        <li class="list-group-item">
+            <strong>Update</strong>
+            <a href="javascript:void(0)" ng-click="companyUpdate()" class="pull-right">run</a>
+            <code ng-show="companyUpdateResult">{{companyUpdateResult}}</code>
+        </li>
+        <li class="list-group-item">
+            <strong>Delete</strong>
+            <a href="javascript:void(0)" ng-click="companyDelete()" class="pull-right">run</a>
+            <code ng-show="companyDeleteResult">{{companyDeleteResult}}</code>
+        </li>
+    </ul>
+
+
+    <h5>Team (apiary)</h5>
+
+    <ul class="list-group">
+        <li class="list-group-item">
+            <strong>Create</strong>
+            <a href="javascript:void(0)" ng-click="teamCreate()" class="pull-right">run</a>
+            <code ng-show="teamCreateResult">{{teamCreateResult}}</code>
+        </li>
+        <li class="list-group-item">
+            <strong>Get (List)</strong>
+            <a href="javascript:void(0)" ng-click="teamGet()" class="pull-right">run</a>
+            <code ng-show="teamGetResult">{{teamGetResult}}</code>
+        </li>
+        <li class="list-group-item">
+            <strong>Read</strong>
+            <a href="javascript:void(0)" ng-click="teamRead()" class="pull-right">run</a>
+            <code ng-show="teamReadResult">{{teamReadResult}}</code>
+        </li>
+        <li class="list-group-item">
+            <strong>Update</strong>
+            <a href="javascript:void(0)" ng-click="teamUpdate()" class="pull-right">run</a>
+            <code ng-show="teamUpdateResult">{{teamUpdateResult}}</code>
+        </li>
+        <li class="list-group-item">
+            <strong>Delete</strong>
+            <a href="javascript:void(0)" ng-click="teamDelete()" class="pull-right">run</a>
+            <code ng-show="teamDeleteResult">{{teamDeleteResult}}</code>
+        </li>
+    </ul>
+
+
+
 </div>
+
+

@@ -17,7 +17,30 @@ angular.module('teamoApp')
       $location.path('/login');
     };
 
+    $scope.isSection = function(section) {
+        if (section=='dashboard'){
+            if  ('/dashboard'===$location.path() ||
+                '/team'===$location.path() ||
+                '/questions'===$location.path() ||
+                '/preferences'===$location.path()
+                ){
+                return true;
+            }
+        }
+        return false;
+    };
+
     $scope.isActive = function(route) {
       return route === $location.path();
     };
-  });
+
+    $scope.login = function(){
+        $location.path('/login');
+    };
+
+    $scope.signup = function(){
+        $location.path('/signup');
+    };
+
+
+    });

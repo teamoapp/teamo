@@ -1,0 +1,14 @@
+<ul class="nav nav-pills nav-stacked" ng-controller="SidebarCtrl">
+  <li ng-class="{active: isActive('/dashboard')}">
+      <a href="/dashboard">Dashboard</a>
+  </li>
+  <li ng-class="{active: isActive('/team')}">
+      <a href="/team">Team</a>
+  </li>
+  <li ng-class="{active: isActive('/questions')}">
+      <a href="/questions">Questions</a>
+  </li>
+  <li ng-class="{active: isActive('/preferences')}">
+      <a href="/preferences">Preferences</a>
+  </li>
+</ul>

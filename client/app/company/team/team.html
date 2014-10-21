@@ -1,0 +1,58 @@
+
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class="container company-container">
+    <div class="row">
+
+        <div class="col-sm-3">
+            <div ng-include="'components/sidebar/sidebar.html'"></div>
+        </div>
+
+        <div class="col-sm-9">
+
+            <h3>Leaders <a ng-click="add(companies[0].owners)"><i class="glyphicon glyphicon-plus-sign add"></i></a></h3>
+
+            <ul class="list-group">
+                <section ng-repeat="company in companies">
+                    <li class="list-group-item" ng-repeat="user in company.owners" ng-hide="user.hide">
+                        <strong>{{user.name}} [{{company.name}}]</strong><br>
+                        <span class="text-muted">{{user.email}}</span>
+                        <a ng-click="delete(user)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
+                    </li>
+                </section>
+            </ul>
+
+
+            <h3>Members <a ng-click="add(users)"><i class="glyphicon glyphicon-plus-sign add"></i></a></h3>
+
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="user in users" ng-hide="user.hide">
+                    <!-- list mode -->
+                    <a ng-hide="user.editing" ng-click="edit(user)" class="edit"><span class="glyphicon glyphicon-pencil pull-left"></span></a>
+                    <strong ng-hide="user.editing">{{user.name}}</strong><br>
+                    <span class="text-muted" ng-hide="user.editing">{{user.email}}</span>
+                    <a ng-hide="user.editing" ng-click="delete(user)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
+
+                    <!-- edit mode -->
+                    <a ng-show="user.editing" ng-click="edit(user)" class="edit"><span class="glyphicon glyphicon-ok-circle pull-right"></span></a>
+                    <a ng-show="user.editing" ng-click="edit(user)" class="edit"><span class="glyphicon glyphicon-remove pull-left"></span></a>
+                    <form class="form-inline" role="form" ng-show="user.editing">
+                        <div class="form-group">
+                            <label class="sr-only" for="name">Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="Name" ng-model="user.name">
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only" for="email">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="Email" ng-model="user.email">
+                        </div>
+                    </form>
+                </li>
+            </ul>
+
+
+        </div>
+
+    </div>
+</div>
+
+

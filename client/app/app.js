@@ -1,6 +1,8 @@
 'use strict';
 
 angular.module('teamoApp', [
+  'teamo.services',
+  'angular-dimple',
   'ngCookies',
   'ngResource',
   'ngSanitize',
