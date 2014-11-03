@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('teamoApp')
-  .controller('SettingsCtrl', function ($scope, User, Auth) {
+  .controller('SettingsCtrl', function ($scope, userRepo, Auth) {
     $scope.errors = {};
 
     $scope.changePassword = function(form) {

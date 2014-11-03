@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('teamoApp')
-    .controller('AdminCtrl', function ($scope, $http, Auth, User, ApiaryUser, ApiaryCompany, ApiaryTeamCollection, ApiaryTeam) {
+    .controller('AdminCtrl', function ($scope, $http, Auth, userRepo, ApiaryUser, ApiaryCompany, ApiaryTeamCollection, ApiaryTeam) {
 
         // Use the User $resource to fetch all users
-        $scope.users = User.query();
+        $scope.users = userRepo.get();
 
         $scope.delete = function(user) {
             User.remove({ id: user._id });
