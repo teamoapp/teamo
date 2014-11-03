@@ -1,0 +1,69 @@
+add a team
+	we send invitation to the email of the new leader(owner)
+	we create a team
+	if the user exists we assign as a leader of the team or before create a user
+
+	team/create
+	{ "teamName" : "teamo", "email" : "nick@drmnick.com" }
+		this will create team with provided name and send the person and invite as for a leader (same exact way), side note we can add to invite bit like firstLeader and have different UI for the invitation screen (in the future) 
+
+add a member
+ 	search for email in system or send invitation
+ 	member should have a status to identify to a leader that they are verified
+
+ 	in invite we want to store: 
+ 		Status (pending, accepted, declined, removed)
+ 		Code the random invitation code
+ 		Email the email of the user (to check if exists at the time of the acceptance of the invitation)
+ 		UserId at the time of the creation of the invitaion check if user already exists (if set then should be used insted of the Email field)
+ 		TeamId 
+ 		IsLeader store if the invitation was send to add leader or member
+
+ 	invitation/create
+	{ "email" : "nick@drmnick.com", "isLeader" : false }
+		invitation code XYZ1234 would be created and the email address would be associated with it check for existence of the user 
+
+add a leader
+	search for email in system or send invitation
+ 	leader should have a status to identify to a leader that they are verified
+
+	when someone create a team the person becomes a leader of the team
+	leader cannot remove himself from the team, so this way we would always have at least one leader
+	last leader would be removed at the time when they close the team
+
+	invitation/create
+	{ "email" : "nick@drmnick.com", "isLeader" : true }
+		invitation code XYZ1234 would be created and the email address would be associated with it check for existence of the user 
+
+respond to the invitation
+	screen to respond for the invite and provide optionally phone number with verification
+
+	invitation/check
+	check if user was created for the invitation code
+	{ "invitationCode" : "XYZ5366" }
+
+		{ "errors" : [{"code" : "invalid", "message": "invitation is not present or already used"}]} accepted/declined status or invitation does not exist
+		{ "errors" : [{"code" : "removed", "message": "invitation was removed"}], "teamName" : "teamo" } invitation was removed
+		{ "teamName" : "teamo", "firstName" : "nick", "lastName" : "petrus", "isLeader" : false } in this case show greeting screen, associate user with invitation if user exists in the system with the email
+		{ "teamName" : "teamo", "isLeader" : false } means that there is no user in the system with the email associated with invitation code and it should be created
+
+	invitation/accept
+	{ "invitationCode" : "XYZ1234", "firstName" : "nick", "lastName" : "petrus", "phoneNumber" : "6123828289" }
+		the above create user and make them a member of the team
+	{ "invitationCode" : "XYZ5366" }
+		if user already in the system the it just assign them to the team
+
+	invitation/decline
+	{ "invitationCode" : "XYZ5366" }
+
+	UI would be different for Member vs Leader, Invitation is Invalid vs Removed, User exists vs New User
+
+
+remove 
+	member just removes association of a user and a team (member)
+	leader just removes association of a user and a team (leader)
+
+	member/remove
+	{"memberId" : 1234}
+	leader/remove
+	{"leaderId" : 1234}
