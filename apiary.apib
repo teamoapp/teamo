@@ -257,7 +257,7 @@ Get *all* teams for the selected company
 
     [Team Collection][]
     
-## Invitations for Team Members [/invitation?{teamId,code,email,isLeader,isAccept}]
+## Invitation [/invitation?{teamId,code,email,isLeader,isAccept}]
 
 Send invitation for members to join a team, check invitation status, accept or decline invitation.
 
@@ -294,7 +294,7 @@ Create team member invitation
         
 + Response 200
 
-    [Team][]
+    [Invitation][]
     
 
 ### Respond [PUT]
@@ -309,7 +309,7 @@ Accept or decline an invitation
         } 
 + Response 200
 
-    [Team][]
+    [Invitation][]
 
 ### Read [GET]
 
@@ -323,7 +323,7 @@ Get status for the selected invitation
 
 + Response 200
 
-    [Team][]
+    [Invitation][]
 
 
     
