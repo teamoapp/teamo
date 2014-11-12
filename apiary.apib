@@ -256,3 +256,75 @@ Get *all* teams for the selected company
 + Response 200
 
     [Team Collection][]
+    
+## Invitations for Team Members [/invitation?{teamId,code,email,isLeader,isAccept}]
+
+Send invitation for members to join a team, check invitation status, accept or decline invitation.
+
++ Parameters
+    + teamId (required, number, `1`) ... unique identity of the team 
+    + code (required, string, `foo`) ... unique code of the invitation
+    + email (required, string, `user@host.com`) ... email of the team member to send invitation to
+    + isLeader = `false` (optional, bool, `true`) ... indicates if the member should be invited as leader
+    + isAccept = `false` (optional, bool, `true`) ... expand field "name" of the team 
+
++ Model (application/json)
+
+        {
+            "teamId": 21,
+            "code": "xxxxxxxx,
+            "email": "user@host.com",
+            "isLeader": true
+            "isAccept": true
+        }
+        
+
+
+### Create [POST]
+
+Create team member invitation
+
++ Request (application/json)
+
+        {
+            "teamId": "1",
+            "email": ["user@host.com"] // Would invite User to the marketing team
+            "isLeader": true // Would assign User as a leader
+        }
+        
++ Response 200
+
+    [Team][]
+    
+
+### Respond [PUT]
+
+Accept or decline an invitation
+
++ Request (application/json)
+
+        {
+            "code": "22dab315-95ea-459d-b2d5-41c0e4bc0b47",
+            "isAccept": true // Would mark invitation as accepted
+        } 
++ Response 200
+
+    [Team][]
+
+### Read [GET]
+
+Get status for the selected invitation
+
++ Request (application/json)
+
+        {
+            "code": "22dab315-95ea-459d-b2d5-41c0e4bc0b47"
+        } 
+
++ Response 200
+
+    [Team][]
+
+
+    
+
